@@ -26,7 +26,7 @@ int main()
             cat.reboot(lickingfur);//失败直接崩溃，并进行重启
         }
     }
-    while(true)
+    while(true)//死循环，防止退出程序
     {
         p=cat.touch.pressure();
         l=cat.video.Illumination();
@@ -71,8 +71,27 @@ int main()
         }
         if(cat.anger.num()>=100)
         {
-            //如果生气值大于等于100，则击打，次数为生气值-100的2倍
-            cat.hit((cat.anger.num()-100)*2);//本代码在奶牛猫上极易崩溃，请谨慎触发条件
+            //如果生气值大于等于100，则击打，次数为生气值-100的2倍，击打完成后会清空生气值
+            try
+            {
+                int sign=cat.hit((cat.anger.num()-100)*2);//本代码在奶牛猫上极易崩溃，请谨慎触发条件
+                if(sign==-1) throw sign;
+            }
+            catch(int a)
+            {
+                cout<<"system is crash!code:"<<a<<"system will start emergency reboot!!!\n";
+                cat.crash(a);//如果崩溃，则抛出cat crash
+            }
+        }
+        if(cat.touch.backpressure()!=0)
+        {
+            cout<<"something is on the back\n";
+            cat.setleg(l3,l4)=RETRACTED;//如果背上有东西，则后两条腿潜行，直到背上的东西脱落
+        }
+        if(cat.touch.headpressure!=0)
+        {
+            cout<<"something is on the head\n";
+            cat.hand()=PUTSOMETHINGDOWN;//如果脑袋上有东西，则用手扒拉下来，本代码极易与舔毛冲突，懒得管catdrivers.h的问题了，默认崩溃是在catdrivers.h内部崩溃触发的，代码-1
         }
         if(cat.crashreport(errcode)!=NULL)
         {
