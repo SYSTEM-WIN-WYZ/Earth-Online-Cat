@@ -18,7 +18,7 @@ int main()
         {
             int wlan=cat.wlan.connect(returncode);//尝试连接橘域网，如果成功，则无返回（默认为NULL），若失败，返回-1
             if(wlan==-1) throw wlan;//如果失败抛出异常
-            else cout<<"connect to the wlan successfully!"//如果成功则继续执行
+            else cout<<"connect to the wlan successfully!\n"//如果成功则继续执行
         }
         catch(int a)
         {
