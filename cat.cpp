@@ -88,7 +88,7 @@ int main()
             cout<<"something is on the back\n";
             cat.setleg(l3,l4)=RETRACTED;//如果背上有东西，则后两条腿潜行，直到背上的东西脱落
         }
-        if(cat.touch.headpressure!=0)
+        if(cat.touch.headpressure()!=0)
         {
             cout<<"something is on the head\n";
             cat.hand()=PUTSOMETHINGDOWN;//如果脑袋上有东西，则用手扒拉下来，本代码极易与舔毛冲突，懒得管catdrivers.h的问题了，默认崩溃是在catdrivers.h内部崩溃触发的，代码-1
